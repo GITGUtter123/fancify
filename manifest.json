@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Text Fancifier",
+  "version": "1.0.0",
+  "description": "Transform ordinary text into sophisticated prose with a single click!",
+  "permissions": ["activeTab", "clipboardWrite", "storage"],
+  "host_permissions": [
+    "https://api.datamuse.com/*",
+    "https://api.dictionaryapi.dev/*",
+    "https://wordsapiv1.p.rapidapi.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

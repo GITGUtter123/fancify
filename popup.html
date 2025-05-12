@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text Fancifier</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body { width: 400px; }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .tab-button {
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .tab-button.active {
+      background-color: #3B82F6;
+      color: white;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-4">
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <h1 class="text-2xl font-bold mb-4 text-center text-gray-800">
+      Text Fancifier
+    </h1>
+    
+    <div class="flex mb-4 border-b">
+      <button id="fancifyTab" class="tab-button active mr-2">Fancify</button>
+      <button id="synonymTab" class="tab-button">Synonym Finder</button>
+    </div>
+    
+    <div id="fancifySection">
+      <textarea 
+        id="inputText"
+        class="w-full h-40 p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Paste your text here..."
+      ></textarea>
+      
+      <div class="flex space-x-4 mb-4">
+        <button 
+          id="fancifyBtn"
+          class="flex-1 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+        >
+          Fancify Text
+        </button>
+        <button 
+          id="copyBtn"
+          class="flex-1 bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-300"
+          disabled
+        >
+          Copy Fancified Text
+        </button>
+      </div>
+      
+      <div class="mb-4">
+        <h3 class="text-md font-semibold mb-2 text-gray-700">
+          Fancification Settings
+        </h3>
+        
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm text-gray-600">Context Awareness</span>
+          <label class="switch">
+            <input type="checkbox" id="contextAwareToggle" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm text-gray-600">Preserve Proper Nouns</span>
+          <label class="switch">
+            <input type="checkbox" id="preserveProperNounsToggle" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="mt-2">
+          <span class="text-sm text-gray-600">Fancification Intensity</span>
+          <input 
+            type="range" 
+            id="intensitySlider" 
+            min="1" 
+            max="3" 
+            value="2" 
+            class="w-full"
+          >
+          <div class="flex justify-between text-xs text-gray-600">
+            <span>Mild</span>
+            <span>Moderate</span>
+            <span>Extreme</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-4 hidden" id="fancifiedSection">
+        <h2 class="text-lg font-semibold mb-2 text-gray-700">
+          Fancified Text:
+        </h2>
+        <textarea 
+          id="fancifiedText"
+          class="w-full h-40 p-3 border rounded-md bg-gray-50 focus:outline-none"
+          readonly
+        ></textarea>
+      </div>
+    </div>
+    
+    <div id="synonymSection" class="hidden">
+      <div class="mb-4">
+        <input 
+          id="synonymInput"
+          type="text" 
+          class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter a word to find synonyms..."
+        >
+      </div>
+      <button 
+        id="findSynonymsBtn"
+        class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300 mb-4"
+      >
+        Find Synonyms
+      </button>
+      <div id="synonymResults" class="border rounded-md p-3 bg-gray-50 min-h-40">
+        <p class="text-gray-500 text-center">Results will appear here</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
